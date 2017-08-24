@@ -1,1 +1,1 @@
-# pubsub implementation with typescript
+# pubsub implementation in typescript
