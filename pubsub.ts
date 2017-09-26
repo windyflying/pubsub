@@ -11,9 +11,9 @@ export class PubSubService {
 
   /**
    * 为topic增加一个订阅者
-   * @param topic 
+   * @param topic
    * @param subscriber
-   * @param context 
+   * @param context
    */
   subscribe(topic: string, subscriber: Function, context?: object) {
     const eventity = this.eventity;
@@ -30,6 +30,27 @@ export class PubSubService {
       }
     }
     subs.push({subscriber, context: context || null});
+    return this;
+  }
+
+  /**
+   * 该方法只会为topic添加一个订阅者。使用该方法要注意可能会清空topic的其它
+   * 订阅者，包括用subscribe方法添加的订阅者。因此，除非你很明确你要做什么，否则，
+   * 要避免该方法与subscribe方法订阅同一个topic。
+   * @param topic
+   * @param subscriber
+   * @param context
+   */
+  onece(topic: string, subscriber: Function, context?: object) {
+    const eventity = this.eventity;
+    context = context || null;
+    // 如果该topic还没有订阅者，则添加一个
+    if (!eventity[topic]) {
+      eventity[topic] = [{subscriber: subscriber, context: context}];
+      return this;
+    }
+    // 如果已经有订阅者，则替换它
+    eventity[topic] = [{subscriber: subscriber, context: context}];
     return this;
   }
 
