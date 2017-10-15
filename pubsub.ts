@@ -1,5 +1,5 @@
 
-export class PubSubService {
+class PubSubService {
   /**
    * 存储订阅者，并把topic与subscribers关联
    */
