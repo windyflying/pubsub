@@ -3,8 +3,8 @@ class PubSubService {
   /**
    * 存储订阅者，并把topic与subscribers关联
    */
-  private eventity: { 
-    [prop: string]: Array<{subscriber: Function, context: object}> 
+  private eventity: {
+    [prop: string]: Array<{ subscriber: Function, context: object }>
   } = {};
 
   constructor() { }
@@ -20,7 +20,7 @@ class PubSubService {
     let subs = eventity[topic];
     if (!subs) {
       subs = eventity[topic] = [];
-      subs.push({subscriber, context: context || null});
+      subs.push({ subscriber, context: context || null });
       return this;
     }
     for (let i = 0; i < subs.length; i++) {
@@ -29,7 +29,7 @@ class PubSubService {
         return this;
       }
     }
-    subs.push({subscriber, context: context || null});
+    subs.push({ subscriber, context: context || null });
     return this;
   }
 
@@ -39,7 +39,7 @@ class PubSubService {
    * @param subscriber
    * @param context
    */
-  onece(topic: string, subscriber: Function, context?: object) {
+  once(topic: string, subscriber: Function, context?: object) {
     const eventity = this.eventity;
     context = context || null;
 
