@@ -15,12 +15,12 @@ class PubSubService {
    * @param subscriber
    * @param context
    */
-  subscribe(topic: string, subscriber: Function, context?: object) {
+  subscribe(topic: string, subscriber: Function, context: object = null) {
     const eventity = this.eventity;
     let subs = eventity[topic];
     if (!subs) {
       subs = eventity[topic] = [];
-      subs.push({ subscriber, context: context || null });
+      subs.push({ subscriber, context: context});
       return this;
     }
     for (let i = 0; i < subs.length; i++) {
@@ -29,7 +29,7 @@ class PubSubService {
         return this;
       }
     }
-    subs.push({ subscriber, context: context || null });
+    subs.push({ subscriber, context: context});
     return this;
   }
 
@@ -39,9 +39,8 @@ class PubSubService {
    * @param subscriber
    * @param context
    */
-  once(topic: string, subscriber: Function, context?: object) {
+  once(topic: string, subscriber: Function, context: object = null) {
     const eventity = this.eventity;
-    context = context || null;
 
     // 不管有没有订阅者，直接设置。注意：该方法可能会清空topic的其它订阅者，
     // 包括用subscribe方法添加的订阅者。因此，除非你很明确你要做什么，否则，
