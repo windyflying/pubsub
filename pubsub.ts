@@ -20,7 +20,7 @@ class PubSubService {
     let subs = eventity[topic];
     if (!subs) {
       subs = eventity[topic] = [];
-      subs.push({ subscriber, context: context});
+      subs.push({ subscriber, context: context });
       return this;
     }
     for (let i = 0; i < subs.length; i++) {
@@ -29,7 +29,7 @@ class PubSubService {
         return this;
       }
     }
-    subs.push({ subscriber, context: context});
+    subs.push({ subscriber, context: context });
     return this;
   }
 
